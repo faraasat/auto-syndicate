@@ -1,14 +1,13 @@
-"use client"
+"use client";
 
-import { Navigation } from "@/components/navigation"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/card"
-import { Button } from "@/components/button"
-import { Input } from "@/components/input"
-import { useState } from "react"
+import { useState } from "react";
+import { Navigation } from "@/components/navigation";
+import { Card, CardContent } from "@/components/card";
+import { Input } from "@/components/input";
+import { Button } from "@/components/button";
 
 export default function MarketplacePage() {
-  const [filter, setFilter] = useState("all")
-  
+  const [activeTab, setActiveTab] = useState("all");
   const loans = [
     {
       id: "1",
@@ -100,12 +99,12 @@ export default function MarketplacePage() {
       sector: "Infrastructure",
       covenant: "1.4x DSCR",
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen">
       <Navigation />
-      
+
       <div className="pt-24 pb-20 px-6">
         <div className="container mx-auto">
           {/* Header */}
@@ -114,7 +113,8 @@ export default function MarketplacePage() {
               Loan <span className="text-gradient">Marketplace</span>
             </h1>
             <p className="text-xl text-muted-foreground">
-              Discover institutional loan opportunities powered by AI-driven matching
+              Discover institutional loan opportunities powered by AI-driven
+              matching
             </p>
           </div>
 
@@ -150,25 +150,35 @@ export default function MarketplacePage() {
             <Card>
               <CardContent className="pt-6 text-center">
                 <div className="text-3xl font-bold text-gradient mb-1">24</div>
-                <div className="text-sm text-muted-foreground">Active Loans</div>
+                <div className="text-sm text-muted-foreground">
+                  Active Loans
+                </div>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="pt-6 text-center">
-                <div className="text-3xl font-bold text-gradient mb-1">$1.2B</div>
-                <div className="text-sm text-muted-foreground">Total Volume</div>
+                <div className="text-3xl font-bold text-gradient mb-1">
+                  $1.2B
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Total Volume
+                </div>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="pt-6 text-center">
-                <div className="text-3xl font-bold text-gradient mb-1">5.6%</div>
+                <div className="text-3xl font-bold text-gradient mb-1">
+                  5.6%
+                </div>
                 <div className="text-sm text-muted-foreground">Avg Rate</div>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="pt-6 text-center">
                 <div className="text-3xl font-bold text-gradient mb-1">82</div>
-                <div className="text-sm text-muted-foreground">Avg ESG Score</div>
+                <div className="text-sm text-muted-foreground">
+                  Avg ESG Score
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -176,70 +186,118 @@ export default function MarketplacePage() {
           {/* Loans Grid */}
           <div className="space-y-4">
             {loans.map((loan) => (
-              <Card key={loan.id} className="hover:border-neon-cyan/30 transition-all">
+              <Card
+                key={loan.id}
+                className="hover:border-neon-cyan/30 transition-all"
+              >
                 <CardContent className="p-6">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
                         <div>
-                          <h3 className="text-xl font-bold mb-1">{loan.borrower}</h3>
+                          <h3 className="text-xl font-bold mb-1">
+                            {loan.borrower}
+                          </h3>
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <span>{loan.sector}</span>
                             <span>•</span>
                             <span>{loan.purpose}</span>
                           </div>
                         </div>
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          loan.status === "Syndication" 
-                            ? "bg-neon-cyan/20 text-neon-cyan" 
-                            : "bg-neon-green/20 text-neon-green"
-                        }`}>
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                            loan.status === "Syndication"
+                              ? "bg-neon-cyan/20 text-neon-cyan"
+                              : "bg-neon-green/20 text-neon-green"
+                          }`}
+                        >
                           {loan.status}
                         </span>
                       </div>
-                      
+
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
                         <div>
-                          <div className="text-xs text-muted-foreground">Total Amount</div>
+                          <div className="text-xs text-muted-foreground">
+                            Total Amount
+                          </div>
                           <div className="font-semibold">{loan.amount}</div>
                         </div>
                         <div>
-                          <div className="text-xs text-muted-foreground">Term</div>
+                          <div className="text-xs text-muted-foreground">
+                            Term
+                          </div>
                           <div className="font-semibold">{loan.term}</div>
                         </div>
                         <div>
-                          <div className="text-xs text-muted-foreground">Interest Rate</div>
-                          <div className="font-semibold text-neon-cyan">{loan.rate}</div>
+                          <div className="text-xs text-muted-foreground">
+                            Interest Rate
+                          </div>
+                          <div className="font-semibold text-neon-cyan">
+                            {loan.rate}
+                          </div>
                         </div>
                         <div>
-                          <div className="text-xs text-muted-foreground">Risk Rating</div>
+                          <div className="text-xs text-muted-foreground">
+                            Risk Rating
+                          </div>
                           <div className="font-semibold">{loan.riskRating}</div>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3">
                         <div>
-                          <div className="text-xs text-muted-foreground">Remaining</div>
-                          <div className="font-semibold text-neon-purple">{loan.remaining}</div>
+                          <div className="text-xs text-muted-foreground">
+                            Remaining
+                          </div>
+                          <div className="font-semibold text-neon-purple">
+                            {loan.remaining}
+                          </div>
                         </div>
                         <div>
-                          <div className="text-xs text-muted-foreground">Min Investment</div>
-                          <div className="font-semibold">{loan.minInvestment}</div>
+                          <div className="text-xs text-muted-foreground">
+                            Min Investment
+                          </div>
+                          <div className="font-semibold">
+                            {loan.minInvestment}
+                          </div>
                         </div>
                         <div>
-                          <div className="text-xs text-muted-foreground">ESG Score</div>
-                          <div className="font-semibold text-neon-green">{loan.esgScore}/100</div>
+                          <div className="text-xs text-muted-foreground">
+                            ESG Score
+                          </div>
+                          <div className="font-semibold text-neon-green">
+                            {loan.esgScore}/100
+                          </div>
                         </div>
                         <div>
-                          <div className="text-xs text-muted-foreground">Covenant</div>
-                          <div className="font-semibold text-xs">{loan.covenant}</div>
+                          <div className="text-xs text-muted-foreground">
+                            Covenant
+                          </div>
+                          <div className="font-semibold text-xs">
+                            {loan.covenant}
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex md:flex-col gap-2 md:w-40">
-                      <Button className="flex-1" variant="default">
+                    <div className="flex md:flex-col gap-2 md:w-48">
+                      <Button
+                        className="flex-1"
+                        variant="default"
+                        onClick={() =>
+                          (window.location.href = `/documents/review?id=${loan.id}`)
+                        }
+                      >
                         View Details
+                      </Button>
+                      <Button
+                        className="flex-1"
+                        variant="outline"
+                        onClick={() =>
+                          (window.location.href = `/allocate/results?id=${loan.id}`)
+                        }
+                      >
+                        Analyze Allocation
                       </Button>
                       <Button className="flex-1" variant="outline">
                         Express Interest
@@ -253,14 +311,24 @@ export default function MarketplacePage() {
 
           {/* Pagination */}
           <div className="flex justify-center mt-8 gap-2">
-            <Button variant="outline" size="sm">Previous</Button>
-            <Button variant="neon" size="sm">1</Button>
-            <Button variant="outline" size="sm">2</Button>
-            <Button variant="outline" size="sm">3</Button>
-            <Button variant="outline" size="sm">Next</Button>
+            <Button variant="outline" size="sm">
+              Previous
+            </Button>
+            <Button variant="neon" size="sm">
+              1
+            </Button>
+            <Button variant="outline" size="sm">
+              2
+            </Button>
+            <Button variant="outline" size="sm">
+              3
+            </Button>
+            <Button variant="outline" size="sm">
+              Next
+            </Button>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

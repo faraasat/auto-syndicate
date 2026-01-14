@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -63,41 +63,43 @@ const config: Config = {
       },
       animation: {
         "glow-pulse": "glow-pulse 2s ease-in-out infinite",
-        "float": "float 6s ease-in-out infinite",
-        "shimmer": "shimmer 2s linear infinite",
-        "gradient": "gradient 8s ease infinite",
+        float: "float 6s ease-in-out infinite",
+        shimmer: "shimmer 2s linear infinite",
+        gradient: "gradient 8s ease infinite",
       },
       keyframes: {
         "glow-pulse": {
-          "0%, 100%": { 
+          "0%, 100%": {
             opacity: "1",
             filter: "drop-shadow(0 0 8px currentColor)",
           },
-          "50%": { 
+          "50%": {
             opacity: "0.6",
             filter: "drop-shadow(0 0 20px currentColor)",
           },
         },
-        "float": {
+        float: {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-20px)" },
         },
-        "shimmer": {
+        shimmer: {
           "0%": { backgroundPosition: "-200% center" },
           "100%": { backgroundPosition: "200% center" },
         },
-        "gradient": {
+        gradient: {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
         },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "cyber-grid": "linear-gradient(90deg, rgba(0,240,255,0.1) 1px, transparent 1px), linear-gradient(rgba(0,240,255,0.1) 1px, transparent 1px)",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "cyber-grid":
+          "linear-gradient(90deg, rgba(0,240,255,0.1) 1px, transparent 1px), linear-gradient(rgba(0,240,255,0.1) 1px, transparent 1px)",
       },
       backgroundSize: {
-        "grid": "50px 50px",
+        grid: "50px 50px",
       },
     },
   },

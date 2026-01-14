@@ -2,7 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  reactCompiler: true,
+  experimental: {
+    reactCompiler: true,
+  },
+  transpilePackages: ["@autosyndicate/database"],
 };
 
 export default nextConfig;

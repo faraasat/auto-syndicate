@@ -14,9 +14,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "AutoSyndicate™ | AI-Powered Loan Syndication Platform",
-  description: "Transform institutional loan markets with intelligent capital allocation, automated document processing, and real-time covenant monitoring.",
-  keywords: ["loan syndication", "AI", "institutional loans", "capital allocation", "ESG", "secondary trading"],
+  description:
+    "Transform institutional loan markets with intelligent capital allocation, automated document processing, and real-time covenant monitoring.",
+  keywords: [
+    "loan syndication",
+    "AI",
+    "institutional loans",
+    "capital allocation",
+    "ESG",
+    "secondary trading",
+  ],
 };
+
+import { WebSocketProvider } from "@/lib/websocket-context";
 
 export default function RootLayout({
   children,
@@ -28,9 +38,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background`}
       >
-        <div className="cyber-grid-bg min-h-screen">
-          {children}
-        </div>
+        <WebSocketProvider>
+          <div className="cyber-grid-bg min-h-screen">{children}</div>
+        </WebSocketProvider>
       </body>
     </html>
   );

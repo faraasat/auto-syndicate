@@ -1,20 +1,23 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+
+import { Notifications } from "@/components/notifications";
 
 export function Navigation() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/features", label: "Features" },
     { href: "/marketplace", label: "Marketplace" },
+    { href: "/documents/review", label: "Review" },
     { href: "/about", label: "About" },
     { href: "/pricing", label: "Pricing" },
     { href: "/contact", label: "Contact" },
-  ]
+  ];
 
   return (
     <nav className="fixed top-0 w-full z-50 glass-dark border-b border-white/10">
@@ -23,7 +26,7 @@ export function Navigation() {
           <Link href="/" className="text-2xl font-bold text-gradient">
             AutoSyndicate™
           </Link>
-          
+
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
@@ -38,8 +41,9 @@ export function Navigation() {
               </Link>
             ))}
           </div>
-          
+
           <div className="flex items-center space-x-4">
+            <Notifications />
             <Link
               href="/login"
               className="px-4 py-2 rounded-lg hover:bg-white/5 transition-colors"
@@ -56,5 +60,5 @@ export function Navigation() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

@@ -1,7 +1,9 @@
-import { InputHTMLAttributes, forwardRef } from "react"
-import { cn } from "@/lib/utils"
+import { InputHTMLAttributes, forwardRef } from "react";
+import { cn } from "@/lib/utils";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  _ui_marker?: string;
+}
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
@@ -18,9 +20,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         {...props}
       />
-    )
+    );
   }
-)
-Input.displayName = "Input"
+);
+Input.displayName = "Input";
 
-export { Input }
+export { Input };

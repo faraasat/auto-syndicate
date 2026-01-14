@@ -52,3 +52,5 @@ __pycache__/
 venv/
 ENV/
 .venv
+
+!.env.example

@@ -1,50 +1,11 @@
 import Link from "next/link";
+import { Navigation } from "@/components/navigation"
 
 export default function HomePage() {
   return (
     <div className="relative">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 glass-dark border-b border-white/10">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold text-gradient">
-              AutoSyndicate™
-            </Link>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/features" className="hover:text-neon-cyan transition-colors">
-                Features
-              </Link>
-              <Link href="/marketplace" className="hover:text-neon-cyan transition-colors">
-                Marketplace
-              </Link>
-              <Link href="/about" className="hover:text-neon-cyan transition-colors">
-                About
-              </Link>
-              <Link href="/pricing" className="hover:text-neon-cyan transition-colors">
-                Pricing
-              </Link>
-              <Link href="/contact" className="hover:text-neon-cyan transition-colors">
-                Contact
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link 
-                href="/login" 
-                className="px-4 py-2 rounded-lg hover:bg-white/5 transition-colors"
-              >
-                Login
-              </Link>
-              <Link 
-                href="/signup" 
-                className="px-6 py-2 rounded-lg bg-gradient-to-r from-neon-cyan to-neon-purple hover:opacity-90 transition-opacity font-semibold"
-              >
-                Get Started
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
+      <Navigation />
+      
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="container mx-auto text-center">

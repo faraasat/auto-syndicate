@@ -5,8 +5,12 @@ import { Button } from "@/components/button";
 import Link from "next/link";
 
 import { PerformanceChart } from "@/components/charts/PerformanceChart";
+import { ActivityCenter } from "@/components/activity-center";
+import { useSession } from "next-auth/react";
 
 export default function DashboardPage() {
+  const { data: session } = useSession();
+  const userName = session?.user?.name || "Investor";
   const stats = [
     { label: "Active Loans", value: "12", change: "+2 this month" },
     {
@@ -51,48 +55,13 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 glass-dark border-b border-white/10">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold text-gradient">
-              AutoSyndicate™
-            </Link>
-            <div className="flex items-center space-x-6">
-              <Link href="/dashboard" className="text-neon-cyan">
-                Dashboard
-              </Link>
-              <Link
-                href="/marketplace"
-                className="hover:text-neon-cyan transition-colors"
-              >
-                Marketplace
-              </Link>
-              <Link
-                href="/analytics"
-                className="hover:text-neon-cyan transition-colors"
-              >
-                Analytics
-              </Link>
-              <Link
-                href="/settings"
-                className="hover:text-neon-cyan transition-colors"
-              >
-                Settings
-              </Link>
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-neon-cyan to-neon-purple"></div>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       <div className="pt-24 pb-12 px-6">
         <div className="container mx-auto">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div>
               <h1 className="text-4xl font-bold mb-2">
-                Welcome back, <span className="text-gradient">Investor</span>
+                Welcome back, <span className="text-gradient">{userName}</span>
               </h1>
               <p className="text-muted-foreground">
                 Here&apos;s what&apos;s happening with your portfolio today
@@ -147,7 +116,7 @@ export default function DashboardPage() {
             ))}
           </div>
 
-          {/* Performance Summary & Recent Loans */}
+          {/* Performance Summary & Activity Feed */}
           <div className="grid lg:grid-cols-3 gap-6 mb-8">
             {/* Performance Summary */}
             <Card className="lg:col-span-2">
@@ -162,42 +131,15 @@ export default function DashboardPage() {
                   </Link>
                 </div>
               </CardHeader>
-              <CardContent className="h-[300px]">
+              <CardContent className="h-[400px]">
                 <PerformanceChart />
               </CardContent>
             </Card>
 
-            {/* Quick Stats / Mini Composition */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent Loan Opportunities</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {recentLoans.map((loan) => (
-                    <div
-                      key={loan.id}
-                      className="p-3 rounded-lg glass border border-white/5 hover:border-neon-cyan/30 transition-colors"
-                    >
-                      <div className="font-semibold text-sm">
-                        {loan.borrower}
-                      </div>
-                      <div className="flex justify-between items-end mt-1">
-                        <span className="text-xs text-muted-foreground">
-                          {loan.amount} • {loan.status}
-                        </span>
-                        <span className="text-xs font-semibold text-neon-cyan">
-                          {loan.allocation}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <Button variant="outline" className="w-full mt-4" size="sm">
-                  View Marketplace
-                </Button>
-              </CardContent>
-            </Card>
+            {/* Activity Center */}
+            <div className="lg:col-span-1 h-[480px]">
+              <ActivityCenter />
+            </div>
           </div>
 
           {/* Quick Actions */}

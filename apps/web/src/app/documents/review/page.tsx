@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Navigation } from "@/components/navigation";
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/card";
@@ -38,8 +37,6 @@ export default function DocumentReviewPage() {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
-
       <div className="pt-24 pb-20 px-6">
         <div className="container mx-auto">
           {/* Header */}
@@ -89,27 +86,27 @@ export default function DocumentReviewPage() {
                     <div className="pl-4 space-y-4">
                       <p>
                         <span className="font-bold text-neon-cyan">
-                          "Borrower"
+                          &ldquo;Borrower&rdquo;
                         </span>{" "}
                         means Alpha Infrastructure Ltd, a company incorporated
                         in England and Wales with registered number 01234567.
                       </p>
                       <p>
                         <span className="font-bold text-neon-cyan">
-                          "Interest Rate"
+                          &ldquo;Interest Rate&rdquo;
                         </span>{" "}
                         means the aggregate of the applicable SONIA and a Margin
                         of 2.75 per cent. per annum.
                       </p>
                       <p>
                         <span className="font-bold text-neon-cyan">
-                          "Total Facility"
+                          &ldquo;Total Facility&rdquo;
                         </span>{" "}
                         means £500,000,000.
                       </p>
                       <p>
                         <span className="font-bold text-neon-purple">
-                          "Leverage Ratio"
+                          &ldquo;Leverage Ratio&rdquo;
                         </span>{" "}
                         has the meaning given to it in Clause 21 (Financial
                         Covenants).
@@ -312,9 +309,42 @@ export default function DocumentReviewPage() {
                       I have extracted 12 key fields from the document. The
                       interest rate formula matches the LMA standard for
                       SONIA-based facilities. I recommend verifying the Leverage
-                      Ratio definition as it includes a specific "Adjusted
-                      EBITDA" carve-out on page 42.
+                      Ratio definition as it includes a specific &ldquo;Adjusted
+                      EBITDA&rdquo; carve-out on page 42.
                     </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Deal Q&A Section */}
+              <Card className="border-white/10 shadow-xl overflow-hidden">
+                <CardHeader className="bg-white/5 border-b border-white/5">
+                  <CardTitle className="text-sm font-bold flex items-center gap-2">
+                    <span>💬</span> Deal Q&A (LMA Expert)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-0 flex flex-col h-[300px]">
+                  <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                    <div className="flex gap-3">
+                      <div className="w-6 h-6 rounded-full bg-neon-cyan/20 flex items-center justify-center text-[10px]">
+                        AI
+                      </div>
+                      <div className="bg-white/5 rounded-lg p-3 text-xs text-slate-300 max-w-[85%]">
+                        Hello! I've indexed this 85-page Facility Agreement. Ask
+                        me anything about specific clauses or obligations.
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-3 border-t border-white/5 bg-black/40">
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="Ask about Change of Control, EBITDA definition..."
+                        className="h-9 text-xs"
+                      />
+                      <Button size="sm" className="h-9 px-3">
+                        Ask
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

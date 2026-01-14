@@ -7,7 +7,14 @@ import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/card";
 
-export default function LoginPage() {
+import { useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
+
+import { Suspense } from "react";
+
+function LoginForm() {
+  const searchParams = useSearchParams();
+  const signupSuccess = searchParams.get("signup") === "success";
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -16,15 +23,11 @@ export default function LoginPage() {
     setIsLoading(true);
     setError("");
 
-    // Get form data
     const formData = new FormData(e.target as HTMLFormElement);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
     try {
-      // Import dynamically to avoid server-side issues in client component if strict
-      const { signIn } = await import("next-auth/react");
-
       const result = await signIn("credentials", {
         email,
         password,
@@ -32,13 +35,13 @@ export default function LoginPage() {
       });
 
       if (result?.error) {
-        setError("Invalid credentials");
+        setError("Invalid email or password. Try demo@example.com / demo123");
       } else {
         window.location.href = "/dashboard";
       }
     } catch (error) {
       console.error(error);
-      setError("Invalid email or password");
+      setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -62,6 +65,11 @@ export default function LoginPage() {
 
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+            {signupSuccess && (
+              <div className="bg-green-500/10 border border-green-500 text-green-500 p-3 rounded text-sm text-center mb-4">
+                Account created successfully! Please sign in.
+              </div>
+            )}
             {error && (
               <div className="bg-red-500/10 border border-red-500 text-red-500 p-3 rounded text-sm text-center">
                 {error}
@@ -150,5 +158,13 @@ export default function LoginPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }

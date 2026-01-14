@@ -359,6 +359,36 @@ async def simulate_breach():
     return {"status": "Breach simulated"}
 
 
+class ChatMessage(BaseModel):
+    message: str
+
+
+@app.post("/api/chat")
+async def chat(msg: ChatMessage):
+    """
+    AI chat assistant endpoint
+    """
+    user_message = msg.message.lower()
+
+    # Context-aware responses
+    if "esg" in user_message or "sustainability" in user_message:
+        response = "ESG (Environmental, Social, Governance) scores range from 0-100. Our platform integrates with UNEP FI and Green Bond Principles. High ESG scores (80+) indicate strong sustainability practices. You can view ESG breakdowns in the Analytics dashboard."
+    elif "allocation" in user_message or "lender" in user_message:
+        response = "Our AI allocation engine uses CrewAI to match loans with lenders based on mandate alignment, risk tolerance, and portfolio diversification. Match scores above 85% indicate strong fit. Check the Allocation Results page for detailed justifications."
+    elif "breach" in user_message or "covenant" in user_message:
+        response = "Covenant monitoring tracks key financial ratios like Leverage and DSCR. Real-time WebSocket alerts notify you instantly of breaches. You can simulate a breach from the Dashboard to see this in action."
+    elif "chart" in user_message or "analytics" in user_message:
+        response = "The Analytics page shows portfolio performance, sector composition, and historical trends. All charts are interactive and pull live data from our backend. You can filter by timeframe (1M, 3M, 6M, 1Y)."
+    elif "document" in user_message or "review" in user_message:
+        response = "Our AI Document Parser extracts structured data from LMA agreements with 88-99% confidence. The Review page lets you verify and correct extractions before syncing to the database."
+    elif "marketplace" in user_message or "loan" in user_message:
+        response = "The Marketplace shows all available loan opportunities. You can filter by sector, ESG score, and risk rating. Click 'Analyze Allocation' to see AI-recommended lender syndicates."
+    else:
+        response = "I can help you with: ESG scoring, capital allocation, covenant monitoring, document review, analytics, and marketplace navigation. What would you like to know more about?"
+
+    return {"response": response}
+
+
 # ==================== HELPER FUNCTIONS ====================
 
 

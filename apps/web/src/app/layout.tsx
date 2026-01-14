@@ -26,21 +26,31 @@ export const metadata: Metadata = {
   ],
 };
 
-import { WebSocketProvider } from "@/lib/websocket-context";
+import { Providers } from "@/components/providers";
+import { Navigation } from "@/components/navigation";
+import { AIChat } from "@/components/ai-chat";
+import { GuidedTour } from "@/components/tour";
+import { CommandPalette } from "@/components/command-palette";
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background`}
       >
-        <WebSocketProvider>
-          <div className="cyber-grid-bg min-h-screen">{children}</div>
-        </WebSocketProvider>
+        <Providers>
+          <div className="cyber-grid-bg min-h-screen">
+            <Navigation />
+            {children}
+          </div>
+          <AIChat />
+          <GuidedTour />
+          <CommandPalette />
+        </Providers>
       </body>
     </html>
   );

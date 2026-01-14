@@ -1,5 +1,4 @@
-import { Navigation } from "@/components/navigation";
-import { Card, CardContent } from "@/components/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/card";
 import Link from "next/link";
 
 export default function AboutPage() {
@@ -19,8 +18,6 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
-
       <div className="pt-24 pb-20 px-6">
         <div className="container mx-auto">
           {/* Hero */}
@@ -38,165 +35,55 @@ export default function AboutPage() {
           {/* Mission */}
           <Card className="mb-16 border-gradient">
             <CardContent className="p-12">
-              <h2 className="text-3xl font-bold mb-4 text-center">
-                Our Mission
-              </h2>
-              <p className="text-lg text-muted-foreground text-center max-w-3xl mx-auto">
-                To transform institutional loan markets from document-centric,
-                manual processes to data-driven, intelligent capital allocation
-                powered by AI. We&apos;re building the future where loans are
-                executable digital assets, not just legal documents.
-              </p>
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
+                  <p className="text-lg text-slate-300 leading-relaxed mb-6">
+                    AutoSyndicate™ was founded to solve the fragmentation and
+                    inefficiency in the private debt markets. By leveraging
+                    advanced AI and institutional-grade technology, we're
+                    building the operating system for the next generation of
+                    lending.
+                  </p>
+                  <div className="grid grid-cols-2 gap-6">
+                    {stats.map((stat, i) => (
+                      <div key={i}>
+                        <div className="text-2xl font-bold text-neon-cyan">
+                          {stat.value}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {stat.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="relative">
+                  <div className="aspect-square rounded-2xl bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 border border-white/10 flex items-center justify-center text-8xl grayscale hover:grayscale-0 transition-all duration-700">
+                    🏛️
+                  </div>
+                  <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-neon-cyan/10 rounded-full blur-3xl animate-pulse"></div>
+                </div>
+              </div>
             </CardContent>
           </Card>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-            {stats.map((stat, i) => (
-              <Card
-                key={i}
-                className="text-center hover:border-neon-cyan/30 transition-colors"
-              >
-                <CardContent className="pt-8 pb-6">
-                  <div className="text-4xl font-bold text-gradient mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Technology */}
-          <div className="mb-16">
-            <h2 className="text-4xl font-bold text-center mb-12">
-              Powered by <span className="text-gradient">Advanced AI</span>
+          {/* AI Team */}
+          <div className="mb-20">
+            <h2 className="text-3xl font-bold text-center mb-12">
+              Meet the <span className="text-gradient">AI Agents</span>
             </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="hover:border-neon-cyan/30 transition-all">
-                <CardContent className="p-8">
-                  <div className="text-4xl mb-4">🤖</div>
-                  <h3 className="text-2xl font-bold mb-3">
-                    Multi-Agent Architecture
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    Leveraging CrewAI and AutoGen to coordinate specialized AI
-                    agents for document parsing, capital allocation, covenant
-                    monitoring, and ESG analysis.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-cyan/30">
-                      CrewAI
-                    </span>
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-cyan/30">
-                      AutoGen
-                    </span>
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-cyan/30">
-                      LangChain
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:border-neon-purple/30 transition-all">
-                <CardContent className="p-8">
-                  <div className="text-4xl mb-4">⚡</div>
-                  <h3 className="text-2xl font-bold mb-3">
-                    Ultra-Fast Inference
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    Utilizing GroqCloud&apos;s lightning-fast LPU™ inference for
-                    Llama 3.2 and Mixtral models, delivering responses 18x
-                    faster than traditional GPU-based solutions.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-purple/30">
-                      GroqCloud
-                    </span>
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-purple/30">
-                      Llama 3.2
-                    </span>
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-purple/30">
-                      Mixtral
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:border-neon-green/30 transition-all">
-                <CardContent className="p-8">
-                  <div className="text-4xl mb-4">📄</div>
-                  <h3 className="text-2xl font-bold mb-3">
-                    Document Understanding
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    Google Gemini 1.5 Pro with 2M token context window for
-                    comprehensive document analysis, extracting structured data
-                    from complex financial documents.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-green/30">
-                      Gemini 1.5 Pro
-                    </span>
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-green/30">
-                      Vision AI
-                    </span>
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-green/30">
-                      NLP
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover:border-neon-pink/30 transition-all">
-                <CardContent className="p-8">
-                  <div className="text-4xl mb-4">🎯</div>
-                  <h3 className="text-2xl font-bold mb-3">ML Optimization</h3>
-                  <p className="text-muted-foreground mb-4">
-                    scikit-learn powered capital allocation engine with
-                    predictive analytics for risk assessment and covenant breach
-                    prediction.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-pink/30">
-                      scikit-learn
-                    </span>
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-pink/30">
-                      NumPy
-                    </span>
-                    <span className="text-xs px-3 py-1 rounded-full glass border border-neon-pink/30">
-                      Pandas
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* AI Agents Team */}
-          <div className="mb-16">
-            <h2 className="text-4xl font-bold text-center mb-4">
-              Meet Our <span className="text-gradient">AI Agents</span>
-            </h2>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Specialized AI agents working together to transform loan
-              operations
-            </p>
             <div className="grid md:grid-cols-4 gap-6">
-              {team.map((agent, i) => (
+              {team.map((member, i) => (
                 <Card
                   key={i}
-                  className="text-center hover:border-neon-cyan/30 transition-all hover:scale-105"
+                  className="hover:border-neon-cyan/30 transition-all"
                 >
-                  <CardContent className="pt-8 pb-6">
-                    <div className="text-5xl mb-4 animate-glow-pulse">
-                      {agent.icon}
-                    </div>
-                    <h3 className="text-lg font-bold mb-2">{agent.name}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {agent.role}
+                  <CardContent className="p-6 text-center">
+                    <div className="text-4xl mb-4">{member.icon}</div>
+                    <h3 className="font-bold mb-1">{member.name}</h3>
+                    <p className="text-xs text-muted-foreground">
+                      {member.role}
                     </p>
                   </CardContent>
                 </Card>
@@ -204,31 +91,75 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Hackathon */}
-          <Card className="border-gradient">
-            <CardContent className="p-12 text-center">
-              <div className="inline-block mb-4 px-4 py-2 rounded-full glass border border-neon-cyan/30 text-sm">
-                <span className="text-neon-cyan">●</span> LMA EDGE Hackathon
-                2025
-              </div>
-              <h2 className="text-3xl font-bold mb-4">
-                Built for the{" "}
-                <span className="text-gradient">Future of Finance</span>
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                AutoSyndicate™ was developed as part of the LMA EDGE Hackathon,
-                addressing all five challenge categories: Digital Loans, Loan
-                Documents, Transparent Trading, Covenant Monitoring, and ESG
-                Integration.
+          {/* Technology */}
+          <div className="grid md:grid-cols-2 gap-12 mb-20">
+            <div>
+              <h2 className="text-3xl font-bold mb-6">Built for Scale</h2>
+              <p className="text-slate-300 leading-relaxed mb-4">
+                Our technology stack combines the security of institutional
+                finance with the agility of modern AI. Every component is
+                designed for maximum reliability and regulatory compliance.
               </p>
+              <ul className="space-y-3">
+                {[
+                  "LMA-standard document understanding",
+                  "Real-time market liquidity mapping",
+                  "Advanced credit risk modeling",
+                  "Blockchain-ready settlement layer",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <span className="text-neon-cyan">•</span>
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <Card className="bg-white/5 border-white/10">
+                <CardContent className="p-6">
+                  <h3 className="font-bold mb-2">Institutional Security</h3>
+                  <p className="text-sm text-muted-foreground">
+                    SOC2 Type II compliant infrastructure with multi-layer
+                    encryption and biometric access controls.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="bg-white/5 border-white/10">
+                <CardContent className="p-6">
+                  <h3 className="font-bold mb-2">Regulatory Framework</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Designed around MiFID II and AIFMD guidelines for automated
+                    compliance and audit trail management.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center">
+            <h2 className="text-3xl font-bold mb-6">
+              Join the <span className="text-gradient">Lending Revolution</span>
+            </h2>
+            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+              Ready to see how AutoSyndicate™ can transform your business? Start
+              your trial today.
+            </p>
+            <div className="flex gap-4 justify-center">
               <Link
                 href="/signup"
-                className="inline-block px-8 py-4 rounded-lg bg-gradient-to-r from-neon-cyan to-neon-purple hover:opacity-90 transition-opacity font-semibold text-lg glow-cyan"
+                className="px-8 py-3 rounded-lg bg-gradient-to-r from-neon-cyan to-neon-purple font-bold hover:opacity-90 transition-opacity"
               >
-                Join the Revolution
+                Get Started
               </Link>
-            </CardContent>
-          </Card>
+              <Link
+                href="/contact"
+                className="px-8 py-3 rounded-lg glass border border-white/20 font-bold hover:bg-white/5 transition-colors"
+              >
+                Contact Sales
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -9,9 +9,17 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import { SkeletonChart } from "@/components/loading";
+
+interface CompositionDataPoint {
+  name: string;
+  value: number;
+  color: string;
+  [key: string]: string | number;
+}
 
 export function CompositionChart() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<CompositionDataPoint[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -32,13 +40,7 @@ export function CompositionChart() {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="h-full w-full min-h-[300px] flex items-center justify-center">
-        <div className="text-neon-cyan animate-pulse font-bold tracking-widest">
-          LOADING SECTOR DATA...
-        </div>
-      </div>
-    );
+    return <SkeletonChart />;
   }
 
   return (

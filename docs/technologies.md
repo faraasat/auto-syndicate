@@ -81,10 +81,10 @@ Other pages as required by features.
 
 **Database**
 
-- **PostgreSQL 16+** — Primary relational database for structured loan data
-  - Hosting: Neon.tech serverless PostgreSQL
-  - JSONB columns for flexible loan term storage
-  - Full-text search capabilities
+- **SQLite** — Primary relational database for structured loan data
+  - Local development focus
+  - JSON support for flexible loan term storage
+  - Lightweight and zero-configuration
   - Strong ACID compliance for financial transactions
 - **Prisma ORM 5.8+** — Type-safe database access and migrations
   - Auto-generate TypeScript types from schema

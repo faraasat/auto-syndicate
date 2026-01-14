@@ -1,15 +1,25 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Navigation } from "@/components/navigation";
 import { Button } from "@/components/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/card";
 import { CompositionChart } from "@/components/charts/CompositionChart";
 import Link from "next/link";
 
+interface Allocation {
+  lenderId: string;
+  lenderName: string;
+  amount: number;
+  percentage: number;
+  confidence: number;
+  reasoning: string;
+  matchScore: number;
+  tags: string[];
+}
+
 export default function CapitalAllocationResultsPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const [allocations, setAllocations] = useState<any[]>([]);
+  const [allocations, setAllocations] = useState<Allocation[]>([]);
 
   useEffect(() => {
     async function runAnalysis() {
@@ -105,8 +115,6 @@ export default function CapitalAllocationResultsPage() {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
-
       <div className="pt-24 pb-20 px-6">
         <div className="container mx-auto">
           {/* Header */}
@@ -211,7 +219,7 @@ export default function CapitalAllocationResultsPage() {
                     <div className="mt-4 flex gap-3 items-start">
                       <div className="text-lg">🤖</div>
                       <div className="text-sm text-slate-300 leading-relaxed italic">
-                        "{alloc.reasoning}"
+                        &ldquo;{alloc.reasoning}&rdquo;
                       </div>
                     </div>
                   </CardContent>

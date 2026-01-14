@@ -1,6 +1,5 @@
 "use client";
 
-import { Navigation } from "@/components/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/card";
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
@@ -13,8 +12,6 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen">
-      <Navigation />
-
       <div className="pt-24 pb-20 px-6">
         <div className="container mx-auto max-w-6xl">
           {/* Header */}

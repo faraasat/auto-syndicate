@@ -18,7 +18,7 @@
 
 ### Database (packages/database)
 - **ORM**: Prisma
-- **Databases**: PostgreSQL (primary), MongoDB (documents)
+- **Databases**: SQLite (primary), MongoDB (documents)
 - **Schema**: Complete loan marketplace data model
 
 ## 🚀 Getting Started

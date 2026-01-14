@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useWebSocket } from "@/lib/websocket-context";
 
 export function Notifications() {

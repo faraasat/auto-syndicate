@@ -79,7 +79,7 @@ The Python API will be available at http://localhost:8000
 
 ### Web App (.env.local)
 ```bash
-DATABASE_URL="postgresql://user:password@localhost:5432/autosyndicate"
+DATABASE_URL="file:../../packages/database/prisma/dev.db"
 NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="your-secret-key"
 PYTHON_API_URL="http://localhost:8000"
@@ -98,7 +98,7 @@ GOOGLE_AI_API_KEY=your_google_ai_api_key_here
 1. **Run the web app** - See the UI in action
 2. **Test API endpoints** - Visit http://localhost:8000/docs
 3. **Add AI API keys** - Enable AI features
-4. **Setup database** - Configure PostgreSQL
+4. **Setup database** - Configure SQLite
 5. **Customize theme** - Adjust colors in tailwind.config.ts
 
 ## 📚 Technology Stack
@@ -106,7 +106,7 @@ GOOGLE_AI_API_KEY=your_google_ai_api_key_here
 - **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
 - **Backend**: Python FastAPI, LangChain, CrewAI
 - **AI**: GroqCloud (Llama 3.2), Google Gemini
-- **Database**: PostgreSQL + Prisma ORM
+- **Database**: SQLite + Prisma ORM
 - **Theme**: Web3/NFT/Sci-fi inspired design
 
 ## 🎥 For Hackathon Demo

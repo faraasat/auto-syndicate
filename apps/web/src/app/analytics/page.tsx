@@ -1,53 +1,61 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/card";
+import { Button } from "@/components/button";
 import Link from "next/link";
+import { useState } from "react";
+import { useToast } from "@/lib/toast-context";
 
 import { PerformanceChart } from "@/components/charts/PerformanceChart";
 import { CompositionChart } from "@/components/charts/CompositionChart";
+import { BarChart } from "@/components/charts/BarChart";
+import { RadarChart } from "@/components/charts/RadarChart";
 
 export default function AnalyticsPage() {
+  const [timeframe, setTimeframe] = useState("1Y");
+  const { addToast } = useToast();
+
+  const handleExport = () => {
+    addToast("Downloading analytics report...", "info");
+    setTimeout(() => {
+      addToast("Report downloaded successfully", "success");
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 glass-dark border-b border-white/10">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold text-gradient">
-              AutoSyndicate™
-            </Link>
-            <div className="flex items-center space-x-6">
-              <Link
-                href="/dashboard"
-                className="hover:text-neon-cyan transition-colors"
-              >
-                Dashboard
-              </Link>
-              <Link href="/analytics" className="text-neon-cyan">
-                Analytics
-              </Link>
-              <Link
-                href="/settings"
-                className="hover:text-neon-cyan transition-colors"
-              >
-                Settings
-              </Link>
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-neon-cyan to-neon-purple"></div>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       <div className="pt-24 pb-12 px-6">
         <div className="container mx-auto">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-2">
-              Portfolio <span className="text-gradient">Analytics</span>
-            </h1>
-            <p className="text-muted-foreground">
-              Comprehensive insights into your loan portfolio performance
-            </p>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+            <div>
+              <h1 className="text-4xl font-bold mb-2">
+                Portfolio <span className="text-gradient">Analytics</span>
+              </h1>
+              <p className="text-muted-foreground">
+                Comprehensive insights into your loan portfolio performance
+              </p>
+            </div>
+            <div className="flex gap-3">
+              <div className="flex bg-white/5 rounded-lg p-1 border border-white/10">
+                {["1M", "3M", "6M", "1Y", "ALL"].map((tf) => (
+                  <button
+                    key={tf}
+                    onClick={() => setTimeframe(tf)}
+                    className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                      timeframe === tf
+                        ? "bg-neon-cyan text-black shadow-lg shadow-neon-cyan/20"
+                        : "text-muted-foreground hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    {tf}
+                  </button>
+                ))}
+              </div>
+              <Button variant="outline" onClick={handleExport}>
+                Export PDF
+              </Button>
+            </div>
           </div>
 
           {/* Key Metrics */}
@@ -83,18 +91,52 @@ export default function AnalyticsPage() {
             ))}
           </div>
 
-          {/* Analytics Sections */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card>
+          {/* Performance Trends */}
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle>Performance Trends</CardTitle>
+            </CardHeader>
+            <CardContent className="h-[400px]">
+              <PerformanceChart />
+            </CardContent>
+          </Card>
+
+          {/* Analytics Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Composition - Pie */}
+            <Card className="lg:col-span-1">
               <CardHeader>
                 <CardTitle>Portfolio Composition</CardTitle>
               </CardHeader>
-              <CardContent className="h-[350px]">
+              <CardContent className="h-[300px]">
                 <CompositionChart />
               </CardContent>
             </Card>
 
-            <Card>
+            {/* Sector Performance - Bar */}
+            <Card className="lg:col-span-1">
+              <CardHeader>
+                <CardTitle>Sector Allocation ($M)</CardTitle>
+              </CardHeader>
+              <CardContent className="h-[300px]">
+                <BarChart />
+              </CardContent>
+            </Card>
+
+            {/* Risk Analysis - Radar */}
+            <Card className="lg:col-span-1">
+              <CardHeader>
+                <CardTitle>Risk Profile</CardTitle>
+              </CardHeader>
+              <CardContent className="h-[300px]">
+                <RadarChart />
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* ESG & Additional Metrics */}
+          <div className="grid md:grid-cols-3 gap-6 mt-6">
+            <Card className="md:col-span-2">
               <CardHeader>
                 <CardTitle>ESG Portfolio Metrics</CardTitle>
               </CardHeader>
@@ -160,83 +202,39 @@ export default function AnalyticsPage() {
                 </div>
               </CardContent>
             </Card>
-          </div>
 
-          {/* Performance Trends */}
-          <Card className="mt-6">
-            <CardHeader>
-              <CardTitle>Performance Trends (Last 12 Months)</CardTitle>
-            </CardHeader>
-            <CardContent className="h-[400px]">
-              <PerformanceChart />
-            </CardContent>
-          </Card>
-
-          {/* Risk Metrics */}
-          <Card className="mt-6">
-            <CardHeader>
-              <CardTitle>Risk Analysis</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div>
-                  <div className="text-sm text-muted-foreground mb-2">
-                    Credit Quality Distribution
-                  </div>
-                  {[
-                    { rating: "AAA/AA", pct: 15 },
-                    { rating: "A", pct: 25 },
-                    { rating: "BBB", pct: 40 },
-                    { rating: "BB", pct: 15 },
-                    { rating: "B", pct: 5 },
-                  ].map((item, i) => (
-                    <div key={i} className="flex justify-between text-xs mb-1">
-                      <span>{item.rating}</span>
-                      <span className="text-neon-cyan">{item.pct}%</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div>
-                  <div className="text-sm text-muted-foreground mb-2">
-                    Covenant Status
-                  </div>
-                  {[
-                    { status: "Compliant", count: 42, color: "neon-green" },
-                    { status: "At Risk", count: 5, color: "neon-cyan" },
-                    { status: "Breach", count: 1, color: "neon-pink" },
-                  ].map((item, i) => (
-                    <div key={i} className="flex justify-between text-xs mb-2">
-                      <span className="flex items-center">
-                        <span
-                          className={`w-2 h-2 rounded-full bg-${item.color} mr-2`}
-                        ></span>
-                        {item.status}
+            <Card>
+              <CardHeader>
+                <CardTitle>Geographic Distribution</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {[
+                  { region: "North America", pct: 65 },
+                  { region: "Europe", pct: 20 },
+                  { region: "Asia Pacific", pct: 10 },
+                  { region: "Other", pct: 5 },
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex justify-between items-center mb-4"
+                  >
+                    <span className="text-sm">{item.region}</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-24 h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-neon-cyan"
+                          style={{ width: `${item.pct}%` }}
+                        />
+                      </div>
+                      <span className="text-xs font-mono text-muted-foreground w-8 text-right">
+                        {item.pct}%
                       </span>
-                      <span>{item.count}</span>
                     </div>
-                  ))}
-                </div>
-
-                <div>
-                  <div className="text-sm text-muted-foreground mb-2">
-                    Geographic Distribution
                   </div>
-                  {[
-                    { region: "North America", pct: 65 },
-                    { region: "Europe", pct: 20 },
-                    { region: "Asia Pacific", pct: 10 },
-                    { region: "Other", pct: 5 },
-                  ].map((item, i) => (
-                    <div key={i} className="flex justify-between text-xs mb-1">
-                      <span>{item.region}</span>
-                      <span className="text-neon-cyan">{item.pct}%</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

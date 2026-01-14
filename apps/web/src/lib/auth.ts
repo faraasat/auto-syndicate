@@ -26,7 +26,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           // Check for dev mode / seed data
           if (
             process.env.NODE_ENV === "development" &&
-            credentials.email === "demo@example.com"
+            credentials.email === "demo@example.com" &&
+            credentials.password === "demo123"
           ) {
             return {
               id: "demo",

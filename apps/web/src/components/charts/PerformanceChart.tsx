@@ -10,9 +10,18 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { SkeletonChart } from "@/components/loading";
+
+interface PerformanceDataPoint {
+  date: string;
+  value: number;
+  yield: number;
+  name: string;
+  displayValue: string;
+}
 
 export function PerformanceChart() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<PerformanceDataPoint[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -23,17 +32,19 @@ export function PerformanceChart() {
         const json = await response.json();
 
         // Format dates for display (e.g., "Jan 26")
-        const formattedData = json.map((item: any) => {
-          const date = new Date(item.date);
-          return {
-            ...item,
-            name: date.toLocaleDateString("en-US", {
-              month: "short",
-              year: "2-digit",
-            }),
-            displayValue: (item.value / 1000000).toFixed(1), // Convert to millions
-          };
-        });
+        const formattedData = json.map(
+          (item: { date: string; value: number; yield: number }) => {
+            const date = new Date(item.date);
+            return {
+              ...item,
+              name: date.toLocaleDateString("en-US", {
+                month: "short",
+                year: "2-digit",
+              }),
+              displayValue: (item.value / 1000000).toFixed(1), // Convert to millions
+            };
+          }
+        );
 
         setData(formattedData);
       } catch (error) {
@@ -47,13 +58,7 @@ export function PerformanceChart() {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="h-full w-full min-h-[300px] flex items-center justify-center glass rounded-xl border border-white/10">
-        <div className="text-neon-cyan animate-pulse font-bold tracking-widest">
-          LOADING CORE DATA...
-        </div>
-      </div>
-    );
+    return <SkeletonChart />;
   }
 
   return (
@@ -112,7 +117,11 @@ export function PerformanceChart() {
               backdropFilter: "blur(4px)",
             }}
             itemStyle={{ color: "var(--neon-cyan)" }}
-            formatter={(value: any, name: string | undefined) => {
+            formatter={(
+              value: number | undefined,
+              name: string | undefined
+            ) => {
+              if (!value) return [0, name || "Value"];
               if (name === "value")
                 return [`$${(value / 1000000).toFixed(2)}M`, "Total Value"];
               if (name === "yield") return [`${value}%`, "Avg Yield"];

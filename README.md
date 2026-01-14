@@ -27,7 +27,7 @@ autosyndicate/
 
 ### Backend
 - **Next.js API Routes** + Server Actions
-- **PostgreSQL** (Neon.tech) with Prisma ORM
+- **SQLite** with Prisma ORM (Primary DB)
 - **MongoDB** for flexible document storage
 - **Python FastAPI** microservice for AI/ML
 

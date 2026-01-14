@@ -1592,6 +1592,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"api@workspace:apps/api":
+  version: 0.0.0-use.local
+  resolution: "api@workspace:apps/api"
+  languageName: unknown
+  linkType: soft
+
 "argparse@npm:^2.0.1":
   version: 2.0.1
   resolution: "argparse@npm:2.0.1"
